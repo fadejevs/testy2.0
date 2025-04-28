@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import HowItWorks from "./pages/HowItWorks";
 import Pricing from "./pages/Pricing";
 import FAQ from "./pages/FAQ";
+import ClientRetention from "./pages/ClientRetention";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/client-retention" element={<ClientRetention />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

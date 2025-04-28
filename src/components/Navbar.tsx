@@ -20,6 +20,9 @@ const Navbar = () => {
           <Link to="/faq" className="text-slate-600 hover:text-testy-purple transition-colors">
             FAQ
           </Link>
+          <Link to="/client-retention" className="text-slate-600 hover:text-testy-purple transition-colors">
+            Client Retention
+          </Link>
           <Link to="/login">
             <Button variant="outline" className="rounded-full px-6">
               Login
