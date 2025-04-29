@@ -14,14 +14,14 @@ const Landing = () => {
           Client feedback that pays for itself
           </h1>
           <p className="text-lg md:text-2xl text-slate-600 mb-5">
-          Get frequent proof of your service value without the awkward asks. Your clients report wins, you collect testimonials that sell, all with one click.
+          Get consistent proof of your value without the awkward asks. Your clients report wins, you collect testimonials that sell, all with one click.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
           </div>
           <div className="flex flex-col items-center mb-10">
     
           <Button
-            onClick={() => window.open('https://buy.stripe.com/your-stripe-link', '_blank')}
+            onClick={() => window.open('https://buy.stripe.com/dR68yGg3R1gJ6Na005', '_blank')}
             className="bg-green-500 hover:bg-green-600 text-white font-bold shadow-lg rounded-xl px-12 py-5 text-xl flex items-center gap-3"
           >
          $97 Lifetime Access (Limited)
