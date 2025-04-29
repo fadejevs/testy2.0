@@ -1,29 +1,23 @@
-
 import React, { useState } from 'react';
-import { X, AlertTriangle, Check, MessageSquare } from 'lucide-react';
+import { X, AlertTriangle, Check, MessageSquare, Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/hooks/use-toast';
 
 interface ClientCheckInWidgetProps {
   onClose?: () => void;
   clientName?: string;
+  clientId?: string;
 }
 
-const ClientCheckInWidget = ({ onClose, clientName = 'there' }: ClientCheckInWidgetProps) => {
-  const [step, setStep] = useState<'initial' | 'issue' | 'idea' | 'success' | 'thanks'>('initial');
+const ClientCheckInWidget = ({ onClose, clientName = 'there', clientId }: ClientCheckInWidgetProps) => {
+  const [step, setStep] = useState<'initial' | 'issue' | 'idea' | 'win' | 'thanks'>('initial');
   const [feedback, setFeedback] = useState('');
-  const { toast } = useToast();
 
   const handleSubmit = () => {
-    toast({
-      title: "Feedback submitted",
-      description: "Thank you for your feedback!",
-    });
     setStep('thanks');
   };
 
-  const handleFeedbackOption = (option: 'issue' | 'idea' | 'success') => {
+  const handleFeedbackOption = (option: 'issue' | 'idea' | 'win') => {
     setStep(option);
   };
 
@@ -67,19 +61,19 @@ const ClientCheckInWidget = ({ onClose, clientName = 'there' }: ClientCheckInWid
               </button>
               
               <button
-                onClick={() => handleFeedbackOption('success')}
+                onClick={() => handleFeedbackOption('win')}
                 className="flex flex-col items-center justify-center bg-slate-50 hover:bg-slate-100 rounded-md p-4 transition-colors"
               >
                 <div className="bg-green-100 p-2 rounded-full mb-2">
-                  <Check className="h-6 w-6 text-green-500" />
+                  <Trophy className="h-6 w-6 text-green-500" />
                 </div>
-                <span className="text-sm font-medium text-slate-700">Success</span>
+                <span className="text-sm font-medium text-slate-700">Wins</span>
               </button>
             </div>
           </>
         )}
         
-        {(step === 'issue' || step === 'idea' || step === 'success') && (
+        {(step === 'issue' || step === 'idea' || step === 'win') && (
           <>
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center gap-2">
@@ -109,9 +103,9 @@ const ClientCheckInWidget = ({ onClose, clientName = 'there' }: ClientCheckInWid
                   </div>
                 )}
                 
-                {step === 'success' && (
+                {step === 'win' && (
                   <div className="flex items-center gap-2">
-                    <Check className="h-5 w-5 text-green-500" />
+                    <Trophy className="h-5 w-5 text-green-500" />
                     <h3 className="text-lg font-medium">Share a win</h3>
                   </div>
                 )}

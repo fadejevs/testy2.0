@@ -1,9 +1,7 @@
-
 import React, { useState } from 'react';
 import { X, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/hooks/use-toast';
 
 interface TestimonialCollectionWidgetProps {
   onClose?: () => void;
@@ -21,17 +19,11 @@ const TestimonialCollectionWidget = ({
   const [step, setStep] = useState<'initial' | 'detail' | 'thanks'>('initial');
   const [testimonial, setTestimonial] = useState('');
   const [satisfaction, setSatisfaction] = useState<number | null>(null);
-  const { toast } = useToast();
   
   const handleTestimonialSubmit = () => {
     if (onTestimonialSubmit) {
       onTestimonialSubmit(testimonial);
     }
-    
-    toast({
-      title: "Testimonial submitted",
-      description: "Thank you for sharing your experience!",
-    });
     
     setStep('thanks');
   };
@@ -157,10 +149,6 @@ const TestimonialCollectionWidget = ({
                   variant="outline"
                   onClick={() => {
                     // Here you would typically open a share dialog
-                    toast({
-                      title: "Share options",
-                      description: "This would open social sharing options in a real implementation",
-                    });
                   }}
                   className="w-full"
                 >
