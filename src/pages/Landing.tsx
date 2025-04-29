@@ -32,7 +32,6 @@ const Landing = () => {
           y="120"
           width="680"
           height="960"
-          rx="32"
           fill="#C3E6D2"
           opacity="0.13"
         />
@@ -41,7 +40,6 @@ const Landing = () => {
           y="240"
           width="560"
           height="720"
-          rx="24"
           fill="#A0D8BA"
           opacity="0.09"
         />
@@ -50,7 +48,6 @@ const Landing = () => {
           y="400"
           width="400"
           height="400"
-          rx="16"
           fill="#5CB98E"
           opacity="0.05"
         />
