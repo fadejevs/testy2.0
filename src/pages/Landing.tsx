@@ -6,9 +6,57 @@ import dashboardDemo from '@/assets/gif.gif';
 
 const Landing = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-white relative overflow-hidden">
+      {/* SVG background covers the whole page */}
+      <svg
+        className="absolute top-0 left-0 w-full h-full pointer-events-none"
+        style={{ zIndex: 0 }}
+        viewBox="0 0 800 1200"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        preserveAspectRatio="none"
+      >
+        {/* Full width/height background */}
+        <rect
+          x="0"
+          y="0"
+          width="800"
+          height="1200"
+          fill="#E6F4EA"
+          opacity="0.25"
+        />
+        {/* Layered rectangles for effect */}
+        <rect
+          x="60"
+          y="120"
+          width="680"
+          height="960"
+          rx="32"
+          fill="#C3E6D2"
+          opacity="0.13"
+        />
+        <rect
+          x="120"
+          y="240"
+          width="560"
+          height="720"
+          rx="24"
+          fill="#A0D8BA"
+          opacity="0.09"
+        />
+        <rect
+          x="200"
+          y="400"
+          width="400"
+          height="400"
+          rx="16"
+          fill="#5CB98E"
+          opacity="0.05"
+        />
+      </svg>
       <Navbar />
-      <main className="flex-1 flex flex-col items-center justify-center px-4">
+      <main className="flex-1 flex flex-col items-center justify-center px-2 sm:px-4" style={{ position: "relative", zIndex: 1 }}>
         <div className="max-w-3xl w-full text-center mt-16 mb-16">
           <h1 className="text-4xl md:text-7xl font-bold mb-10">
           Client feedback that pays for itself
@@ -22,7 +70,7 @@ const Landing = () => {
     
           <Button
             onClick={() => window.open('https://buy.stripe.com/dR68yGg3R1gJ6Na005', '_blank')}
-            className="bg-green-500 hover:bg-green-600 text-white font-bold shadow-lg rounded-xl px-12 py-5 text-xl flex items-center gap-3"
+            className="bg-green-500 hover:bg-green-600 text-white font-bold shadow-lg rounded-xl px-10 py-5 text-xl flex items-center gap-3"
           >
          $97 Lifetime Access (Limited)
           </Button>
@@ -46,12 +94,16 @@ const Landing = () => {
           </div>
         </div>
         {/* Demo Placeholder */}
-        <div className="w-full max-w-3xl h-64 bg-slate-100 rounded-xl flex items-center justify-center text-slate-400 text-xl border border-slate-200 overflow-hidden">
+        <div className="w-full max-w-3xl h-64 bg-slate-100 rounded-xl flex items-center justify-center text-slate-400 text-xl border border-slate-200 overflow-hidden"
+          style={{
+            border: '1.8px solid rgba(92, 185, 142, 0.30)' // #5CB98E with low opacity
+          }}
+        >
           <img
             src={dashboardDemo}
             alt="Testy dashboard demo"
             className="object-cover w-full h-full"
-            style={{ minHeight: 256 }} // ensures it fills the box
+            style={{ minHeight: 256 }}
           />
         </div>
         <div className="flex flex-col gap-3 text-lg text-slate-700 my-8">
