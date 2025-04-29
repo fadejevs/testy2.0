@@ -59,7 +59,7 @@ const Landing = () => {
           Client feedback that pays for itself
           </h1>
           <p className="text-lg md:text-2xl text-slate-600 mb-5">
-          Get consistent proof of your value without the awkward asks. Your clients report wins, you collect testimonials that sell, all with one click.
+          Keep clients longer. Get proof your stuff works. See who's winning and who's slipping, all with one click.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
           </div>
