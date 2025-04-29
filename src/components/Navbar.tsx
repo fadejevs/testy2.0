@@ -31,13 +31,13 @@ const Navbar = () => {
       <Link to="/" className="flex items-center gap-3">
         <div className="flex items-center gap-2">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <rect x="2" y="2" width="28" height="28" rx="8" fill="#4CAF87"/>
+            <rect x="2" y="2" width="28" height="28" rx="8" fill="#21C55D"/>
             <rect x="9" y="10" width="14" height="12" rx="6" fill="#fff" />
-            <circle cx="14" cy="16" r="1.2" fill="#4CAF87"/>
-            <circle cx="18" cy="16" r="1.2" fill="#4CAF87"/>
-            <path d="M13 19c1 1 3 1 4 0" stroke="#4CAF87" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+            <circle cx="14" cy="16" r="1.2" fill="#21C55D"/>
+            <circle cx="18" cy="16" r="1.2" fill="#21C55D"/>
+            <path d="M13 19c1 1 3 1 4 0" stroke="#21C55D" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
             <rect x="15" y="7" width="2" height="4" rx="1" fill="#fff"/>
-            <circle cx="16" cy="7" r="1" fill="#fff" stroke="#4CAF87" strokeWidth="1"/>
+            <circle cx="16" cy="7" r="1" fill="#fff" stroke="#21C55D" strokeWidth="1"/>
           </svg>
           <span className="font-bold text-xl">Testy</span>
         </div>
@@ -61,7 +61,7 @@ const Navbar = () => {
         ) : (
           <Button
             onClick={() => setShowLogin(true)}
-            className="bg-green-500 hover:bg-green-600 text-white rounded-full px-6 py-2 font-semibold shadow transition"
+            className="bg-[#21C55D] hover:bg-green-600 text-white rounded-full px-6 py-2 font-semibold shadow transition"
           >
             Login
           </Button>

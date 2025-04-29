@@ -17,13 +17,23 @@ const Landing = () => {
         aria-hidden="true"
         preserveAspectRatio="none"
       >
+        <defs>
+          <linearGradient id="rectGreenToWhite" x1="400" y1="120" x2="400" y2="1080" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#C3E6D2" />
+            <stop offset="100%" stopColor="#fff" />
+          </linearGradient>
+          <linearGradient id="bgGreenToWhite" x1="400" y1="0" x2="400" y2="1200" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#fff" />
+            <stop offset="100%" stopColor="#E6F4EA" />
+          </linearGradient>
+        </defs>
         {/* Full width/height background */}
         <rect
           x="0"
           y="0"
           width="800"
           height="1200"
-          fill="#E6F4EA"
+          fill="url(#bgGreenToWhite)"
           opacity="0.25"
         />
         {/* Layered rectangles for effect */}
@@ -32,7 +42,7 @@ const Landing = () => {
           y="120"
           width="680"
           height="960"
-          fill="#C3E6D2"
+          fill="url(#rectGreenToWhite)"
           opacity="0.13"
         />
         <rect
