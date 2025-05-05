@@ -201,17 +201,20 @@ const ClientRetention = () => {
           </p>
           <Button
             onClick={async () => {
-              const { data: { user } } = await supabase.auth.getUser();
-              if (!user) {
-                // Optionally show login modal or redirect to login
-                alert("Please log in to upgrade.");
-                return;
-              }
-              const res = await fetch('/api/create-checkout-session', {
+              const apiBase =
+                window.location.hostname === "localhost"
+                  ? "https://trytesty.com"
+                  : "";
+
+              const res = await fetch(`${apiBase}/api/create-checkout-session`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ user_id: user.id, email: user.email }),
               });
+              if (!res.ok) {
+                alert("Failed to create checkout session. Please try again later.");
+                return;
+              }
               const { url } = await res.json();
               window.location.href = url;
             }}
