@@ -44,20 +44,12 @@ const Navbar = () => {
       </Link>
       <div className="flex gap-3">
         {user ? (
-          <>
-    <Button
-  onClick={() => window.open('https://buy.stripe.com/dR68yGg3R1gJ6Na005', '_blank')}
-  className="bg-black hover:bg-slate-800 text-white rounded-full px-6 py-2 font-semibold shadow transition"
->
-  Get Testy
-</Button>
-            <Button
-  onClick={handleLogout}
-  className="bg-red-100 hover:bg-red-200 text-red-700 rounded-full px-6 py-2 font-semibold shadow transition"
->
-  Logout
-</Button>
-          </>
+          <Button
+            onClick={handleLogout}
+            className="bg-red-100 hover:bg-red-200 text-red-700 rounded-full px-6 py-2 font-semibold shadow transition"
+          >
+            Logout
+          </Button>
         ) : (
           <Button
             onClick={() => setShowLogin(true)}

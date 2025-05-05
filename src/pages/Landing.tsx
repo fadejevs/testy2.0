@@ -39,7 +39,7 @@ const Landing = () => {
         {/* Layered rectangles for effect */}
         <rect
           x="60"
-          y="120"
+          y="100"
           width="680"
           height="960"
           fill="url(#rectGreenToWhite)"

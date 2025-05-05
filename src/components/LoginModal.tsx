@@ -43,7 +43,7 @@ const LoginModal = ({ open, onClose }) => {
             onChange={e => setEmail(e.target.value)}
             autoFocus
           />
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full bg-green-500 hover:bg-green-600 ">
             Sign in with Email
           </Button>
         </form>

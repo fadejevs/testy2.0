@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,6 +11,7 @@ import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
 import { format } from 'date-fns';
+import { supabase } from "@/supabaseClient";
 
 // Mock data for demonstration
 const mockClients = [
@@ -141,6 +142,9 @@ const ClientRetention = () => {
   const [showCheckInWidget, setShowCheckInWidget] = useState(false);
   const [showTestimonialWidget, setShowTestimonialWidget] = useState(false);
   const [scheduledCalls, setScheduledCalls] = useState<ScheduledCall[]>([]);
+  const [isPaid, setIsPaid] = useState<boolean | null>(null);
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
   
   const baseUrl = window.location.origin;
   
@@ -163,9 +167,67 @@ const ClientRetention = () => {
     });
   };
 
+  useEffect(() => {
+    const fetchPaidStatus = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+      if (user) {
+        const { data } = await supabase
+          .from("users")
+          .select("is_paid")
+          .eq("id", user.id)
+          .single();
+        setIsPaid(data?.is_paid ?? false);
+      }
+      setLoading(false);
+    };
+    fetchPaidStatus();
+  }, []);
+
+  if (loading) {
+    return <div className="flex justify-center items-center h-screen">Loading...</div>;
+  }
+
+  if (!isPaid) {
+    // User is not paid: show upgrade screen
+    return (
+      <div className="max-h-screen bg-slate-50">
+        <Navbar user={user} isPaid={isPaid} />
+        <div className="mt-20 flex flex-col justify-center items-center bg-slate-50">
+          <div className="bg-white p-8 rounded-xl shadow-lg max-w-md text-center">
+          <h2 className="text-2xl font-bold mb-4">Unlock the Dashboard</h2>
+          <p className="mb-6 text-slate-600">
+            Upgrade to access all Testy dashboard features and start collecting powerful testimonials!
+          </p>
+          <Button
+            onClick={async () => {
+              const { data: { user } } = await supabase.auth.getUser();
+              if (!user) {
+                // Optionally show login modal or redirect to login
+                alert("Please log in to upgrade.");
+                return;
+              }
+              const res = await fetch('/api/create-checkout-session', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_id: user.id, email: user.email }),
+              });
+              const { url } = await res.json();
+              window.location.href = url;
+            }}
+            className="bg-black hover:bg-slate-800 text-white rounded-full px-6 py-2 font-semibold shadow transition"
+          >
+            Upgrade Now
+          </Button>
+        </div>
+      </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-slate-50">
-      <Navbar />
+      <Navbar user={user} isPaid={isPaid} />
       
       <main className="container py-8">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
