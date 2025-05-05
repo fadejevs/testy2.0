@@ -9,9 +9,13 @@ const LoginModal = ({ open, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("Sending login link...");
+    const redirectTo =
+      window.location.hostname === "localhost"
+        ? "http://localhost:8080/dashboard"
+        : "https://trytesty.com/dashboard";
     const { error } = await supabase.auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: "https://trytesty.com/dashboard" }
+      options: { emailRedirectTo: redirectTo }
     });
     if (error) {
       setStatus("Error: " + error.message);
