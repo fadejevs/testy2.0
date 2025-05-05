@@ -201,12 +201,7 @@ const ClientRetention = () => {
           </p>
           <Button
             onClick={async () => {
-              const apiBase =
-                window.location.hostname === "localhost"
-                  ? "https://trytesty.com"
-                  : "";
-
-              const res = await fetch(`${apiBase}/api/create-checkout-session`, {
+              const res = await fetch('/api/create-checkout-session', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ user_id: user.id, email: user.email }),

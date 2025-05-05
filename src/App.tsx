@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ClientRetention from "./pages/ClientRetention";
 import Landing from "./pages/Landing";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import PaymentTest from "./pages/PaymentTest";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
               </ProtectedRoute>
             }
           />
+          <Route path="/payment-test" element={<PaymentTest />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
