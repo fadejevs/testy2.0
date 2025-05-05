@@ -11,7 +11,7 @@ const LoginModal = ({ open, onClose }) => {
     setStatus("Sending login link...");
     const { error } = await supabase.auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: "http://localhost:8080/dashboard" }
+      options: { emailRedirectTo: "https://trytesty.com/dashboard" }
     });
     if (error) {
       setStatus("Error: " + error.message);
