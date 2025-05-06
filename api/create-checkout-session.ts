@@ -14,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       mode: 'payment',
       line_items: [
         {
-          price: 'price_1RBMPVKks4pzFwyLPHDDqhf3', // Replace with your Stripe price ID
+          price: 'price_1RJAqUKks4pzFwyLJAr8ypBx', // Replace with your Stripe price ID
           quantity: 1,
         },
       ],
