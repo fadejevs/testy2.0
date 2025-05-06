@@ -204,10 +204,8 @@ const ClientRetention = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 relative">
-      {/* Navbar always on top */}
-      <div className="relative z-50">
-        <Navbar user={user} isPaid={isPaid} />
-      </div>
+      {/* Normal Navbar (will be blurred with the rest of the dashboard) */}
+      <Navbar user={user} isPaid={isPaid} />
       <main className="container py-8">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
           <div>
@@ -557,42 +555,50 @@ const ClientRetention = () => {
         <TestimonialCollectionWidget onClose={() => setShowTestimonialWidget(false)} />
       )}
 
-      {/* Overlay for unpaid users, starts below the navbar */}
+      {/* Overlay for unpaid users: covers everything and blurs */}
       {!isPaid && (
-        <div
-          className="fixed left-0 right-0 bottom-0 z-40 flex items-center justify-center"
-          style={{
-            top: '64px', // Adjust this to match your Navbar height (e.g., 64px)
-            backdropFilter: 'blur(8px)',
-            background: 'rgba(255,255,255,0.6)',
-            pointerEvents: 'auto',
-          }}
-        >
-          <div className="bg-white p-8 rounded-xl shadow-lg max-w-md text-center z-60">
-            <h2 className="text-2xl font-bold mb-4">Unlock the Dashboard</h2>
-            <p className="mb-6 text-slate-600">
-              Upgrade to access all Testy dashboard features and start collecting powerful testimonials!
-            </p>
-            <Button
-              onClick={async () => {
-                const res = await fetch('/api/create-checkout-session', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ user_id: user.id, email: user.email }),
-                });
-                if (!res.ok) {
-                  alert("Failed to create checkout session. Please try again later.");
-                  return;
-                }
-                const { url } = await res.json();
-                window.location.href = url;
-              }}
-              className="bg-black hover:bg-slate-800 text-white rounded-full px-6 py-2 font-semibold shadow transition"
-            >
-              Upgrade Now
-            </Button>
+        <>
+          <div
+            className="fixed inset-0 z-40"
+            style={{
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
+              background: 'rgba(255,255,255,0.6)',
+              pointerEvents: 'auto',
+            }}
+          />
+          {/* Modal content, centered */}
+          <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
+            <div className="bg-white p-8 rounded-xl shadow-lg max-w-md text-center pointer-events-auto">
+              <h2 className="text-2xl font-bold mb-4">Unlock the Dashboard</h2>
+              <p className="mb-6 text-slate-600">
+                Upgrade to access all Testy dashboard features and start collecting powerful testimonials!
+              </p>
+              <Button
+                onClick={async () => {
+                  const res = await fetch('/api/create-checkout-session', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: user.id, email: user.email }),
+                  });
+                  if (!res.ok) {
+                    alert("Failed to create checkout session. Please try again later.");
+                    return;
+                  }
+                  const { url } = await res.json();
+                  window.location.href = url;
+                }}
+                className="bg-black hover:bg-slate-800 text-white rounded-full px-6 py-2 font-semibold shadow transition"
+              >
+                Upgrade Now
+              </Button>
+            </div>
           </div>
-        </div>
+          {/* Sharp, interactive Navbar above the blur */}
+          <div className="fixed top-0 left-0 right-0 z-60">
+            <Navbar user={user} isPaid={isPaid} />
+          </div>
+        </>
       )}
     </div>
   );
