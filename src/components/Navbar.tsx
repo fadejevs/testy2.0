@@ -46,28 +46,27 @@ const Navbar = () => {
       </Link>
       <div className="flex gap-3">
         {user ? (
-          
           <>
+            <Button
+              onClick={() => navigate('/dashboard')}
+              className="bg-emerald-500 hover:bg-emerald-600 text-white rounded-full px-4 py-2 font-semibold shadow transition"
+            >
+              Dashboard
+            </Button>
+            <Button
+              onClick={handleLogout}
+              className="bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-full px-4 py-2 font-semibold shadow transition"
+            >
+              Logout
+            </Button>
+          </>
+        ) : (
           <Button
-            onClick={() => navigate('/dashboard')}
-            className="bg-emerald-500 hover:bg-emerald-600 text-white rounded-full px-4 py-2 font-semibold shadow transition"
+            onClick={() => setShowLogin(true)}
+            className="bg-[#5CB98E] hover:bg-[#4B9E7A] text-white rounded-full px-4 py-2 font-semibold shadow transition"
           >
-            Dashboard
+            Login
           </Button>
-          <Button
-            onClick={handleLogout}
-            className="bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-full px-4 py-2 font-semibold shadow transition"
-          >
-            Logout
-          </Button>
-        </>
-      ) : (
-        <Button
-          onClick={() => setShowLogin(true)}
-          className="bg-black hover:bg-slate-800 text-white rounded-full px-4 py-2 font-semibold shadow transition"
-        >
-          Login
-        </Button>
         )}
       </div>
       <LoginModal open={showLogin} onClose={() => setShowLogin(false)} />

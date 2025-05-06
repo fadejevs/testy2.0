@@ -7,7 +7,8 @@ import dashboardDemo from '@/assets/gif.gif';
 const Landing = () => {
   return (
     <div className="min-h-screen flex flex-col bg-white relative overflow-hidden">
-      {/* SVG background covers the whole page */}
+   
+   {/* <div>
       <svg
         className="absolute top-0 left-0 w-full h-full pointer-events-none"
         style={{ zIndex: 0 }}
@@ -27,7 +28,7 @@ const Landing = () => {
             <stop offset="100%" stopColor="#E6F4EA" />
           </linearGradient>
         </defs>
-        {/* Full width/height background */}
+      
         <rect
           x="0"
           y="0"
@@ -36,7 +37,7 @@ const Landing = () => {
           fill="url(#bgGreenToWhite)"
           opacity="0.25"
         />
-        {/* Layered rectangles for effect */}
+     
         <rect
           x="60"
           y="100"
@@ -62,14 +63,23 @@ const Landing = () => {
           opacity="0.05"
         />
       </svg>
+      </div> */}
+
+
+
       <Navbar />
       <main className="flex-1 flex flex-col items-center justify-center px-2 sm:px-4" style={{ position: "relative", zIndex: 1 }}>
         <div className="max-w-3xl w-full text-center mt-16 mb-16">
+          {/* Feature Badge - Ultra Small & Custom Color */}
+          <div className="inline-flex items-center px-2 py-0.5 mb-5 rounded-full border border-[#5CB98E]/20 bg-[#E6F4EA] text-[#4B9E7A] text-xs font-medium" style={{ fontFamily: 'inherit' }}>
+            <span className="mr-1 text-sm" role="img" aria-label="sparkles"></span>
+            Client management tool
+          </div>
           <h1 className="text-4xl md:text-7xl font-bold mb-10">
-          Client feedback that pays for itself
+          Client feedback that sells itself
           </h1>
           <p className="text-lg md:text-2xl text-slate-600 mb-5">
-          Keep clients longer. Get proof your stuff works. See who's winning and who's slipping, all with one click.
+          Check in and collect testimonials from clients in seconds. See who's winning and who's slipping, all with one click.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
           </div>
@@ -81,25 +91,33 @@ const Landing = () => {
           >
          $97 Lifetime Access (Limited)
           </Button>
+          
           </div>
-                    {/* Social Proof */}
-                    <div className="flex flex-col items-center mt-6">
-            <div className="flex -space-x-4 mb-2">
-              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Coach 1" className="w-12 h-12 rounded-full border-2 border-white shadow" />
-              <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Coach 2" className="w-12 h-12 rounded-full border-2 border-white shadow" />
-              <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Coach 3" className="w-12 h-12 rounded-full border-2 border-white shadow" />
-              <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Coach 4" className="w-12 h-12 rounded-full border-2 border-white shadow" />
-              <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Coach 5" className="w-12 h-12 rounded-full border-2 border-white shadow" />
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="flex text-yellow-400 text-xl">
-                ★★★★★
-              </span>
-              <span className="font-bold text-lg text-slate-700">164</span>
-              <span className="text-slate-500">coaches increased their retention</span>
-            </div>
-          </div>
+          
+                    {/* Social Proof - Avatars left, stars right, centered as a row */}
+                    <div className="flex items-center justify-center mt-6 mb-2 gap-2">
+                      {/* Avatars */}
+                      <div className="flex -space-x-4">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Coach 1" className="w-12 h-12 rounded-full border-4 border-white shadow" />
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Coach 2" className="w-12 h-12 rounded-full border-4 border-white shadow" />
+                        <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Coach 3" className="w-12 h-12 rounded-full border-4 border-white shadow" />
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Coach 4" className="w-12 h-12 rounded-full border-4 border-white shadow" />
+                        <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Coach 5" className="w-12 h-12 rounded-full border-4 border-white shadow" />
+                      </div>
+                      {/* Stars */}
+                      <div className="flex items-center gap-1">
+                        {[...Array(5)].map((_, i) => (
+                          <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.175c.969 0 1.371 1.24.588 1.81l-3.38 2.455a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.38-2.454a1 1 0 00-1.175 0l-3.38 2.454c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.175a1 1 0 00.95-.69l1.286-3.967z"/>
+                          </svg>
+                        ))}
+                      </div>
+                    </div>
+
+          
+          
         </div>
+        
         {/* Demo Placeholder */}
         <div className="w-full max-w-3xl h-64 bg-slate-100 rounded-xl flex items-center justify-center text-slate-400 text-xl border border-slate-200 overflow-hidden"
           style={{
@@ -112,6 +130,18 @@ const Landing = () => {
             className="object-cover w-full h-full"
             style={{ minHeight: 256 }}
           />
+        </div>
+        <div className="w-full max-w-3xl bg-green-50 border border-green-200 rounded-xl p-6 mb-8 mt-10 flex items-center">
+          <div className="text-green-600 mr-4">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2"/>
+              <path d="M8 12L11 15L16 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <h3 className="font-bold text-xl">30-Day "Keep Your Money" Guarantee</h3>
+            <p className="text-slate-700">If you don't see measurable improvement in client engagement within 30 days, we'll refund every penny. No questions, no hassles.</p>
+          </div>
         </div>
         <div className="flex flex-col gap-3 text-lg text-slate-700 my-8">
             <div className="flex items-center gap-2">
@@ -133,6 +163,7 @@ const Landing = () => {
               <span>No code, no chasing, no funny business</span>
             </div>
           </div>
+          
       </main>
     </div>
   );
