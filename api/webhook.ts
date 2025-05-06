@@ -40,6 +40,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const userId = session.metadata?.user_id;
     console.log("Webhook received for user:", userId, "Session:", session.id, "Metadata:", session.metadata);
     if (userId) {
+      try {
+        const ping = await fetch(process.env.SUPABASE_URL);
+        console.log('Supabase ping status:', ping.status);
+      } catch (e) {
+        console.error('Supabase ping failed:', e);
+      }
       const { error } = await supabase
         .from('users')
         .update({ is_paid: true })
