@@ -204,7 +204,10 @@ const ClientRetention = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 relative">
-      <Navbar user={user} isPaid={isPaid} />
+      {/* Navbar always on top */}
+      <div className="relative z-50">
+        <Navbar user={user} isPaid={isPaid} />
+      </div>
       <main className="container py-8">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
           <div>
@@ -554,11 +557,12 @@ const ClientRetention = () => {
         <TestimonialCollectionWidget onClose={() => setShowTestimonialWidget(false)} />
       )}
 
-      {/* Overlay for unpaid users */}
+      {/* Overlay for unpaid users, starts below the navbar */}
       {!isPaid && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center"
+          className="fixed left-0 right-0 bottom-0 z-40 flex items-center justify-center"
           style={{
+            top: '64px', // Adjust this to match your Navbar height (e.g., 64px)
             backdropFilter: 'blur(8px)',
             background: 'rgba(255,255,255,0.6)',
             pointerEvents: 'auto',
