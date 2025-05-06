@@ -181,7 +181,21 @@ const ClientRetention = () => {
       }
       setLoading(false);
     };
+
+    // Always fetch on mount
     fetchPaidStatus();
+
+    // If coming from Stripe success, refetch again after a short delay
+    if (window.location.search.includes("success=1")) {
+      // Optionally, you can add a small delay to ensure webhook has finished
+      setTimeout(() => {
+        fetchPaidStatus();
+        // Optionally, clean up the URL
+        const url = new URL(window.location.href);
+        url.searchParams.delete("success");
+        window.history.replaceState({}, document.title, url.pathname);
+      }, 1500); // 1.5 seconds
+    }
   }, []);
 
   if (loading) {
