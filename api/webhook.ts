@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2022-11-15' });
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2025-04-30.basil' });
 const supabase = createClient(
   process.env.SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY! // Service role key, never expose to frontend!
@@ -14,7 +14,7 @@ export const config = {
   },
 };
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).end('Method Not Allowed');
 
   const sig = req.headers['stripe-signature'] as string;
@@ -38,6 +38,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const session = event.data.object as Stripe.Checkout.Session;
     const userId = session.metadata?.user_id;
     if (userId) {
+      // Mark user as paid in Supabase
       await supabase
         .from('users')
         .update({ is_paid: true })
@@ -46,6 +47,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   res.status(200).json({ received: true });
-};
-
-export default handler;
+}
