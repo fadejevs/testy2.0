@@ -31,19 +31,29 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     event = stripe.webhooks.constructEvent(buf, sig, process.env.STRIPE_WEBHOOK_SECRET!);
   } catch (err: any) {
+    console.error("Webhook signature verification failed:", err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session;
     const userId = session.metadata?.user_id;
+    console.log("Webhook received for user:", userId, "Session:", session.id, "Metadata:", session.metadata);
     if (userId) {
-      // Mark user as paid in Supabase
-      await supabase
+      const { error } = await supabase
         .from('users')
         .update({ is_paid: true })
         .eq('id', userId);
+      if (error) {
+        console.error("Supabase update error:", error.message);
+      } else {
+        console.log("User marked as paid in Supabase:", userId);
+      }
+    } else {
+      console.error("No userId found in session metadata");
     }
+  } else {
+    console.log("Received unrelated event type:", event.type);
   }
 
   res.status(200).json({ received: true });
