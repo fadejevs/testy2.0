@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import TestyLogo from "@/components/TestyLogo";
 import { supabase } from "@/supabaseClient";
 import LoginModal from "@/components/LoginModal";
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Check initial session
@@ -44,19 +46,28 @@ const Navbar = () => {
       </Link>
       <div className="flex gap-3">
         {user ? (
+          
+          <>
+          <Button
+            onClick={() => navigate('/dashboard')}
+            className="bg-emerald-500 hover:bg-emerald-600 text-white rounded-full px-4 py-2 font-semibold shadow transition"
+          >
+            Dashboard
+          </Button>
           <Button
             onClick={handleLogout}
-            className="bg-red-100 hover:bg-red-200 text-red-700 rounded-full px-6 py-2 font-semibold shadow transition"
+            className="bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-full px-4 py-2 font-semibold shadow transition"
           >
             Logout
           </Button>
-        ) : (
-          <Button
-            onClick={() => setShowLogin(true)}
-            className="bg-[#21C55D] hover:bg-green-600 text-white rounded-full px-6 py-2 font-semibold shadow transition"
-          >
-            Login
-          </Button>
+        </>
+      ) : (
+        <Button
+          onClick={() => setShowLogin(true)}
+          className="bg-black hover:bg-slate-800 text-white rounded-full px-4 py-2 font-semibold shadow transition"
+        >
+          Login
+        </Button>
         )}
       </div>
       <LoginModal open={showLogin} onClose={() => setShowLogin(false)} />
